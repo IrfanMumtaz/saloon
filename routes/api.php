@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/services', 'App\Http\Controllers\ServiceController@get');
+Route::post('/bookings', 'App\Http\Controllers\BookingController@store');
 

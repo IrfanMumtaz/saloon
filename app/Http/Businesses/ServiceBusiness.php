@@ -17,7 +17,7 @@ class ServiceBusiness
             $q->where('day', $day);
         }]);
         
-        $serviceUnavailable = ServiceUnAvailableService::firstByDate($date);
+        $serviceUnavailable = ServiceUnAvailableService::byDateAndDay($date, $day);
 
         foreach ($services as $s) {
             $serviceAvailable[] = [
@@ -47,15 +47,23 @@ class ServiceBusiness
             $end = date('H:i',strtotime('+'.$service->duration_minutes.' minutes',strtotime($startTime)));
             $startTime = date('H:i',strtotime('+'.$service->sloting_minutes.' minutes',strtotime($startTime)));
 
-            if( (strtotime($startTime) <= strtotime($endTime)) && 
-                ($end <= $availability->time_end) && 
-                ($unavailability == null || (strtotime($startTime) < strtotime($unavailability?->time_start) || strtotime($startTime) > strtotime($unavailability?->time_end)))
-            ){
+            $slotAvailable = true;
+            foreach ($unavailability as $u) {
+                if( 
+                    (strtotime($startTime) >= strtotime($endTime)) || 
+                    (strtotime($startTime) >= strtotime($availability->time_end)) || 
+                    (strtotime($start) >= strtotime($u?->time_start) && strtotime($start) < strtotime($u?->time_end))
+                ){
+                    $slotAvailable = false;
+                }
+            }
+
+            if($slotAvailable){
                 $time[] = [
-                    'date' => $date,
-                    'start_time' => $start,
-                    'end_time' => $end
-                ];
+                        'date' => $date,
+                        'start_time' => $start,
+                        'end_time' => $end
+                    ];
             }
         }
         return $time;

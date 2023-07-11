@@ -10,5 +10,10 @@ class ServiceService
     {
         return Service::with($with)->get();
     }
+
+    public static function first($id, $with = [])
+    {
+        return Service::with($with)->where('id', $id)->first();
+    }
     
 }

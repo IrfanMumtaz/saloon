@@ -6,9 +6,14 @@ use App\Models\ServiceUnavailable;
 
 class ServiceUnAvailableService
 {
-    public static function firstByDate($date)
+    public static function byDateAndDay($date, $day)
     {
-        return ServiceUnavailable::where('date', $date)->first();
+        return ServiceUnavailable::where('date', $date)->orWhere('day', $day)->get();
+    }
+
+    public static function byDay($day)
+    {
+        return ServiceUnavailable::where('day', $day)->get();
     }
     
 }
