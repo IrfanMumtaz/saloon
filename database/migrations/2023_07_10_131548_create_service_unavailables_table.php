@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('service_unavailables', function (Blueprint $table) {
             $table->id();
+            $table->string('date')->nullable();
+            $table->string('day')->nullable();
+            $table->string('time_start');
+            $table->string('time_end');
+            $table->string('reason')->nullable();
             $table->timestamps();
         });
     }

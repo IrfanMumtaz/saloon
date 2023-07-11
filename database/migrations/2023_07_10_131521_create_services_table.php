@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->integer("duration_minutes");
+            $table->integer("capacity");
+            $table->integer("sloting_minutes");
+            $table->integer("sloting_break");
+            $table->integer("booking_capacity_days");
             $table->timestamps();
         });
     }

@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('service_availables', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_id');
-            $table->string('date')->nullable();
-            $table->string('day')->nullable();
-            $table->string('time_start');
-            $table->string('time_end');
+            $table->unsignedBigInteger("service_id");
+            $table->string("date");
+            $table->string("time_start");
+            $table->string("time_end");
+            $table->string("time_buffered");
+            $table->string("first_name");
+            $table->string("last_name");
+            $table->string("email_name");
             $table->timestamps();
 
             $table->foreign('service_id')->references('id')->on('services')->onUpdate('cascade')->onDelete('cascade');
@@ -33,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_availables');
+        Schema::dropIfExists('bookings');
     }
 };
