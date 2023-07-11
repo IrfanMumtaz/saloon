@@ -21,8 +21,9 @@ class ServiceBusiness
 
         foreach ($services as $s) {
             $serviceAvailable[] = [
+                'id' => $s->id,
                 'name' => $s->name,
-                'time_available' => self::getTimeSlot($date, $s, $s->availability, $serviceUnavailable)
+                'time_available' => collect(self::getTimeSlot($date, $s, $s->availability, $serviceUnavailable))
             ];
 
         }
