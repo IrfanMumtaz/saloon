@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("time_buffered");
             $table->string("first_name");
             $table->string("last_name");
-            $table->string("email_name");
+            $table->string("email");
             $table->timestamps();
 
             $table->foreign('service_id')->references('id')->on('services')->onUpdate('cascade')->onDelete('cascade');

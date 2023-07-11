@@ -31,7 +31,7 @@ class ServiceBusiness
 
     }
 
-    private static function getTimeSlot($date, $service, $availability, $unavailability)
+    public static function getTimeSlot($date, $service, $availability, $unavailability)
     {
         $time = [];
         
